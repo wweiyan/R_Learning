@@ -1,0 +1,45 @@
+---
+title: "R基础学习笔记"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r,echo=FALSE,results='hide'}
+#隐藏代码，不输出结果
+runif(7)
+
+```
+
+##随机变量生成rnorm、runif、qnorm、pnorm等等
+```{r message=FALSE, warning=FALSE, paged.print=FALSE}
+#随机变量生成
+library(tidyverse)
+set.seed(1)
+x <- rnorm(10, mean = 70, sd = 4) %>% trunc 
+summary(x)
+hist(x)
+boxplot(x)
+
+```
+
+
+##抽样问题、蒙特卡洛模拟
+```{r}
+#寻找x个人中，出现两个或两个以上同个月份生日的概率
+moths=12
+brithday <- function(num, times=500){
+  x <- replicate(times,{
+    temp <- table(sample(1:12,num,replace = T))
+    any(temp >1)
+    })
+  mean(x)
+}
+brithday(4)
+
+```
+
+
+

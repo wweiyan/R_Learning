@@ -1,0 +1,69 @@
+---
+title: "三门模拟问题"
+output: html_document
+---
+
+## 三门问题
+
+
+```{r,echo=FALSE,results='hide'}
+x <- sample(c(1,2,3), size = 50, replace = T)
+
+
+## 不换门的概率
+mean(x==1)
+
+
+## 换门的概率模拟计算
+Set <- c(1,2,3)
+
+x <- sample(Set,1)
+Set[Set != 1 & Set != x]
+setdiff(Set,c(x,1))
+rep(setdiff(Set,c(x,1)),2)
+y <- sample(rep(setdiff(Set,c(x,1)),2),1)
+z <- setdiff(Set,c(x,y))
+
+#table(.Last.value)
+.Last.value
+
+```
+
+```{r message=FALSE, warning=TRUE, paged.print=FALSE}
+
+z_chouyan <- function(x){
+  a <- 1:3
+  x <- sample(a,1)
+  temp <- a[a!=1 & a!=x]
+  y <- ifelse(length(temp) == 1, temp, sample(x = temp, size = 1))
+  setdiff(a,c(x,y))
+}
+
+n <- 1000
+mean(sapply(rep(1,n), z_chouyan) ==1)
+
+```
+
+```{r}
+#寻找x个人中，出现两个或两个以上同个月份生日的概率
+moths=12
+brithday <- function(num, times=500){
+  x <- replicate(times,{
+    temp <- table(sample(1:12,num,replace = T))
+    any(temp >1)
+    })
+  mean(x)
+}
+brithday(4)
+```
+
+
+
+
+
+
+Add a new chunk by clicking the *Insert Chunk* button on the toolbar or by pressing *Ctrl+Alt+I*.
+
+When you save the notebook, an HTML file containing the code and output will be saved alongside it (click the *Preview* button or press *Ctrl+Shift+K* to preview the HTML file).
+
+The preview shows you a rendered HTML copy of the contents of the editor. Consequently, unlike *Knit*, *Preview* does not run any R code chunks. Instead, the output of the chunk when it was last run in the editor is displayed.
