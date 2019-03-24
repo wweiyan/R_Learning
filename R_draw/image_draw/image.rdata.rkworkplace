@@ -1,0 +1,9 @@
+base::::file:///media/D/Documents/Codes/R
+script::::file:///media/D/Documents/Codes/R/image.R
+script::::file:///media/D/Documents/Codes/R/bay.R
+workspace::sidebar,0::
+commandlog::sidebar,3::
+filebrowser::sidebar,0::
+pendingjobs::sidebar,4::
+console::sidebar,3::
+helpsearch::sidebar,3::
